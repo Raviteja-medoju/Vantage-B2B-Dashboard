@@ -1,0 +1,113 @@
+import { test, expect } from '@playwright/test';
+
+test('directory preserves context, assigns owners, and recovers from empty searches', async ({ page }) => {
+  await page.goto('/accounts?status=active&sort=name&dir=asc&page=2');
+  await expect(page.getByText('Page 2 of', { exact: false })).toBeVisible();
+  const first = page.locator('tbody a').first();
+  const accountUrl = await first.getAttribute('href');
+  await first.click();
+  await page.getByRole('link', { name: 'Back to accounts' }).click();
+  await expect(page).toHaveURL(/status=active&sort=name&dir=asc&page=2/);
+  await page.getByRole('checkbox', { name: 'Select row', exact: false }).first().check();
+  await page.getByRole('button', { name: 'Assign owner', exact: true }).click();
+  const dialog = page.getByRole('dialog');
+  await dialog.getByLabel('Account owner').selectOption({ index: 2 });
+  const newOwner = await dialog.getByLabel('Account owner').inputValue();
+  await dialog.getByRole('button', { name: 'Assign owner' }).click();
+  await page.goto(accountUrl!);
+  await expect(page.locator('dd').filter({ hasText: newOwner })).toBeVisible();
+  await page.reload();
+  await expect(page.locator('dd').filter({ hasText: newOwner })).toBeVisible();
+  await page.goto('/accounts?q=NoSuchCompany123&status=active');
+  await expect(page.getByText('No accounts match this view')).toBeVisible();
+  await page.getByRole('button', { name: 'Clear search' }).click();
+  await expect(page.getByRole('tab', { name: /^Active/ })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.locator('tbody a').first()).toBeVisible();
+});
+
+test('account actions persist and flow into the personal queue', async ({ page }) => {
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.goto('/work');
+  const expectedName = await page.locator('article').first().locator('a strong').textContent();
+  await page.getByRole('link', { name: 'Review', exact: true }).first().click();
+  await expect(page).toHaveURL(/\/accounts\/acc-/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(expectedName!);
+  const name = await page.getByRole('heading', { level: 1 }).textContent();
+  await page.getByRole('button', { name: 'Follow account', exact: true }).click();
+  await page.getByLabel('New account note').fill('Prepare an adoption review with the customer success team.');
+  await page.getByRole('button', { name: 'Save note', exact: true }).click();
+  await page.getByRole('button', { name: 'Add follow-up' }).click();
+  await expect(page.getByLabel('What needs to happen?')).toBeFocused();
+  await page.getByLabel('What needs to happen?').fill('Prepare renewal discussion');
+  await page.getByLabel('Due date').fill('2026-12-01');
+  await page.getByRole('button', { name: 'Create follow-up' }).click();
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Following', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByText('Prepare an adoption review with the customer success team.', { exact: true })).toBeVisible();
+  await expect(page.getByText('Prepare renewal discussion', { exact: true })).toBeVisible();
+  await page.screenshot({ path: 'test-results/account-desktop.png', fullPage: true });
+  await page.goto('/work?view=following');
+  await expect(page.getByRole('link', { name: new RegExp(name!.trim()) }).first()).toBeVisible();
+  await page.getByRole('tab', { name: /^Follow-ups/ }).click();
+  await page.getByRole('checkbox', { name: 'Complete Prepare renewal discussion' }).click();
+  await expect(page.getByText('Space for your next move')).toBeVisible();
+  await page.getByLabel('Show completed').click();
+  await expect(page.getByLabel('Show completed')).toBeChecked();
+  await page.getByRole('checkbox', { name: 'Reopen Prepare renewal discussion' }).click();
+  await expect(page.getByText('No completed follow-ups yet')).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
+test('quick search supports keyboard navigation and recent account tabs', async ({ page }) => {
+  await page.goto('/');
+  await page.keyboard.press('Control+k');
+  const input = page.getByRole('combobox', { name: 'Find an account' });
+  await expect(input).toBeFocused();
+  await input.fill('software');
+  await input.press('ArrowDown');
+  const selected = page.getByRole('option', { selected: true });
+  const name = await selected.locator('strong').textContent();
+  await input.press('Enter');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(name!);
+  await page.getByLabel('Switch account').selectOption({ index: 10 });
+  const tabs = page.getByRole('navigation', { name: 'Open account workspaces' });
+  await expect(tabs.getByRole('link')).toHaveCount(2);
+  await tabs.getByRole('link', { name: name!, exact: true }).click();
+  await tabs.getByRole('button', { name: `Close ${name} tab` }).click();
+  await expect(tabs.getByRole('link')).toHaveCount(1);
+  await page.keyboard.press('Control+k');
+  await input.fill('xxxxxxxxxxxxx');
+  await expect(page.getByText('No accounts match', { exact: false })).toBeVisible();
+  await input.press('Enter');
+  await input.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+});
+
+test('compact navigation is aligned and mobile workflows fit the viewport', async ({ page }) => {
+  await page.goto('/work');
+  await page.getByRole('button', { name: 'Collapse sidebar', exact: true }).click();
+  const sidebar = page.getByRole('complementary', { name: 'Sidebar' });
+  await expect(sidebar).toHaveCSS('width', '72px');
+  const box = await sidebar.boundingBox();
+  const links = sidebar.getByRole('navigation', { name: 'Primary' }).getByRole('link');
+  for (const link of await links.all()) {
+    const rect = await link.boundingBox();
+    expect(Math.abs(rect!.x + rect!.width / 2 - (box!.x + box!.width / 2))).toBeLessThan(1);
+    expect(rect!.width).toBe(48);
+  }
+  await page.screenshot({ path: 'test-results/work-desktop.png', fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole('button', { name: 'Open menu', exact: true }).click();
+  await expect(page.getByRole('dialog', { name: 'Sidebar' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog', { name: 'Sidebar' })).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.getByRole('link', { name: 'Review', exact: true }).first().click();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.getByRole('button', { name: 'Add follow-up' }).click();
+  await expect(page.getByLabel('What needs to happen?')).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('button', { name: 'Add follow-up' })).toBeFocused();
+  await page.screenshot({ path: 'test-results/account-mobile.png', fullPage: true });
+});

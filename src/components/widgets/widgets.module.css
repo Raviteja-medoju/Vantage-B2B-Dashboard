@@ -1,0 +1,173 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 0;
+}
+.summary {
+  display: flex;
+  gap: var(--space-5);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+.summary > div {
+  display: flex;
+  flex-direction: column;
+}
+.summary dt {
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+}
+.summary dd {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+}
+.heroLine {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.heroNumber {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.1;
+}
+.heroCaption {
+  font-size: var(--text-sm);
+  color: var(--color-ink-3);
+}
+.statusList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1-5);
+}
+.statusRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+.statusName {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: var(--weight-medium);
+}
+.statusCount {
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  min-width: 28px;
+  text-align: right;
+}
+.statusArr {
+  color: var(--color-ink-3);
+  font-variant-numeric: tabular-nums;
+  min-width: 80px;
+  text-align: right;
+}
+.tableWidget {
+  display: flex;
+  flex-direction: column;
+}
+.tableFooter {
+  padding: var(--space-2) var(--space-4) var(--space-3);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+}
+.footerLink {
+  font-weight: var(--weight-medium);
+}
+.accountCell {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+.accountName {
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.accountMeta {
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.muted {
+  font-size: var(--text-sm);
+  color: var(--color-ink-3);
+}
+.deltaGood {
+  color: var(--color-good-text);
+  font-weight: var(--weight-medium);
+}
+.deltaBad {
+  color: var(--color-critical-text);
+  font-weight: var(--weight-medium);
+}
+.renewalList {
+  display: flex;
+  flex-direction: column;
+}
+.renewalRow {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.renewalRow:last-child {
+  border-bottom: 0;
+}
+.renewalWhen {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.renewalDays {
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+.renewalWhen[data-urgent] .renewalDays {
+  color: var(--color-serious-text);
+}
+.renewalDate {
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+}
+.quotaList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2-5, 10px);
+}
+.quotaRow {
+  display: grid;
+  grid-template-columns: auto minmax(120px, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: var(--space-3);
+}
+.quotaName {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+.quotaMeter {
+  min-width: 0;
+}
+@media (max-width: 640px) {
+  .quotaRow {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .quotaMeter {
+    grid-column: 1 / -1;
+  }
+}

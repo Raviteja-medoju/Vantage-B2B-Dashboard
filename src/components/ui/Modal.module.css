@@ -1,0 +1,115 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay);
+  animation: fadeIn var(--dur-base) var(--ease-out);
+}
+.panel {
+  position: relative;
+  max-width: 100%;
+  max-height: calc(100vh - 32px);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  outline: none;
+  animation: modalIn var(--dur-base) var(--ease-out);
+}
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-5) var(--space-3);
+}
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.title {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+.description {
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+}
+.body {
+  overflow: auto;
+  padding: 0 var(--space-5) var(--space-5);
+}
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+/* Legacy variant: squared corners, heavier chrome — the 2023 dialog look */
+.legacy .panel {
+  border-radius: 2px;
+  border: 1px solid #9a9a9a;
+  background: #f4f4f4;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.legacy .header {
+  background: #3a5a8a;
+  color: #fff;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 2px 2px 0 0;
+}
+.legacy .header button {
+  color: #fff;
+}
+.legacy .title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.legacy .description {
+  color: #e8e8e8;
+  font-size: 11px;
+}
+.legacy .body {
+  padding: var(--space-4) var(--space-3);
+}
+.legacy .footer {
+  background: #e4e4e4;
+  border-top: 1px solid #bdbdbd;
+  border-radius: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

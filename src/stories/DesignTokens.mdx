@@ -1,0 +1,25 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { ColorTokens, TypeTokens, SpaceTokens } from './TokenSheet';
+
+<Meta title="Foundations/Design tokens" />
+
+# Design tokens
+
+Single source of truth in `src/styles/tokens.css`. Light values live on `:root`; dark values are scoped to
+`[data-theme="dark"]`, which the app's ThemeProvider (and this Storybook's toolbar) stamps on `<html>`.
+Values below are read live from the document, so switch the theme in the toolbar to see the dark set.
+
+## Colour
+
+<ColorTokens />
+
+## Typography
+
+Everything — including the hero figure — uses the system UI sans (`Inter Variable`, falling back to `system-ui`).
+Large standalone numbers use proportional figures; `tabular-nums` is reserved for columns that must align.
+
+<TypeTokens />
+
+## Spacing & radius
+
+<SpaceTokens />

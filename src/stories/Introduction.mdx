@@ -1,0 +1,41 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Introduction" />
+
+# Vantage design system
+
+The component library behind **Vantage — Revenue Intelligence**, a B2B enterprise analytics dashboard.
+This Storybook is the shared review room between design and front-end engineering: every component in the
+product has a story here, with controls, an accessibility panel and a light/dark toggle in the toolbar.
+
+## How to review a build
+
+1. **Start from the token sheet.** Colour, type, spacing and radius live in `src/styles/tokens.css` and are consumed by the
+   product and by every story. If a build looks off, check the token first — most QA tickets were drift, not disagreement.
+2. **Flip the theme.** Dark mode is a *selected* set of steps validated against the dark surface, not an automatic inversion.
+   Use the toolbar toggle on any story.
+3. **Open the Accessibility panel.** Stories are expected to pass without violations. Status badges always pair an icon with a label;
+   every chart has a table twin and keyboard access.
+4. **Compare against the product.** The same component code runs in the app (`npm run dev`). In the app, **UX Lab → Inspect mode**
+   draws the 8pt grid and labels every component instance with its story name.
+
+## Structure
+
+| Section | What lives here |
+| --- | --- |
+| **Foundations** | Tokens, chart guidelines |
+| **Primitives** | Button, IconButton, Badge, Chip, Avatar, feedback |
+| **Inputs** | Checkbox, Switch, SegmentedControl, Tabs, Select, DateRangePicker |
+| **Overlays** | Popover, Menu, Drawer, Modal |
+| **Data display** | Card, DataTable, StatTile |
+| **Charts** | Line, Bar, HBar, Heatmap, SegmentedBar, Meter, Sparkline, Dumbbell |
+| **Widgets** | Dashboard widgets composed from charts and data queries |
+| **Filters** | The A/B-tested filter panel variants |
+| **Patterns** | Full-page compositions |
+
+## Principles
+
+- **Lead with the answer.** One hero number per view; stat tiles for the handful of figures that matter; charts for shape; tables for depth.
+- **One slice, everywhere.** A single filter row scopes every widget, so numbers always agree.
+- **Colour is a job, not decoration.** Categorical hues in a fixed, CVD-validated order; sequential for magnitude; diverging for polarity; status reserved.
+- **Nothing gated behind hover.** Table twins, direct labels and keyboard access on every chart.

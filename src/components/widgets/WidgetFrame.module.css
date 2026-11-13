@@ -1,0 +1,108 @@
+.frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition:
+    box-shadow var(--dur-base) var(--ease-out),
+    opacity var(--dur-base) var(--ease-out),
+    outline-color var(--dur-fast) var(--ease-out);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.frame:hover .handle {
+  opacity: 1;
+}
+.dragging {
+  opacity: 0.35;
+}
+.over {
+  outline-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+}
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-3) 0 var(--space-4);
+  min-height: 48px;
+}
+.handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 24px;
+  margin-left: calc(var(--space-2) * -1);
+  margin-top: 1px;
+  border-radius: var(--radius-sm);
+  color: var(--color-ink-3);
+  cursor: grab;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+  touch-action: none;
+}
+.handle:hover {
+  background: var(--color-surface-3);
+  color: var(--color-ink);
+}
+.handle:focus-visible {
+  opacity: 1;
+}
+.handle:active {
+  cursor: grabbing;
+}
+.titles {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-top: 2px;
+}
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  min-width: 0;
+}
+.title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-snug);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.info {
+  display: inline-flex;
+  color: var(--color-ink-3);
+  border-radius: 50%;
+  cursor: help;
+}
+.subtitle {
+  margin-top: 1px;
+  font-size: var(--text-sm);
+  color: var(--color-ink-3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 0 0 auto;
+}
+.body {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+}
+.bodyFlush {
+  padding: var(--space-2) 0 0;
+}
+.header{padding:20px 18px 4px 24px}.body{padding:20px 24px 24px}.bodyFlush{padding:12px 0 0}.title{font-size:14px}.subtitle{margin-top:5px;font-size:11px}.frame:hover{box-shadow:var(--shadow-md)}@media(max-width:640px){.header{padding:16px 12px 4px 16px}.body{padding:16px}.bodyFlush{padding:10px 0 0}}

@@ -1,0 +1,15 @@
+node_modules
+dist
+storybook-static
+*.log
+.DS_Store
+Thumbs.db
+.vite
+
+.npm-cache/
+test-results/
+playwright-report/
+.vercel/
+.env
+.env.*
+!.env.example

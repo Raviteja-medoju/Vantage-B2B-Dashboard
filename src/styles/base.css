@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Base styles: reset, typography, focus, motion, utilities, inspect mode
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: var(--color-accent-text);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+img,
+svg {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Focus: visible, consistent, never removed */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: var(--color-accent-soft-2);
+}
+
+/* Subtle, theme-aware scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-strong) transparent;
+}
+
+/* Reduced motion: keep transitions near-instant */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Utilities
+   -------------------------------------------------------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: var(--space-4);
+  z-index: var(--z-toast);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-radius: var(--radius-md);
+  font-weight: var(--weight-medium);
+}
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.eyebrow {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   Inspect mode (design QA): an 8pt grid and component outlines with labels.
+   Toggled from the UX Lab menu; mirrors how design/engineering reviewed builds.
+   -------------------------------------------------------------------------- */
+:root[data-inspect='true'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: calc(var(--z-lab) - 1);
+  background-image:
+    linear-gradient(to right, rgba(42, 120, 214, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(42, 120, 214, 0.1) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+:root[data-inspect='true'] [data-component] {
+  outline: 1px dashed rgba(42, 120, 214, 0.9);
+  outline-offset: -1px;
+  position: relative;
+}
+
+:root[data-inspect='true'] [data-component]::after {
+  content: attr(data-component);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  padding: 1px 5px;
+  font: 500 10px/14px var(--font-mono);
+  color: #fff;
+  background: rgba(42, 120, 214, 0.95);
+  border-radius: 0 0 var(--radius-xs) 0;
+  pointer-events: none;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: nowrap;
+}

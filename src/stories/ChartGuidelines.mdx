@@ -1,0 +1,45 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Chart guidelines" />
+
+# Chart guidelines
+
+The chart primitives in `src/components/charts` encode these rules so they cannot drift between designs and builds.
+
+## Pick the form before the colour
+
+| The reader must… | Use |
+| --- | --- |
+| Read a single current value (+ trend) | **StatTile** — never a one-bar chart |
+| See the one number a view leads with | **Hero figure** (≥ 48px, same sans, exactly one per view) |
+| Follow change over time | **LineChart** (area wash for a single series) |
+| Compare gains vs losses per period | **BarChart** stacked, diverging around the baseline |
+| Rank parts, read close values | **HBarChart** — one baseline, one hue, value at the tip |
+| See how one whole splits at a glance | **SegmentedBar** tall (≤ 6 parts) |
+| Read a split beside its figures | **SegmentedBar** thin |
+| Compare magnitude across a grid | **Heatmap** — one hue, 7 bins |
+| Judge a ratio against a limit | **Meter** — fill carries severity, track is a lighter step |
+| Compare before → after per item | **Dumbbell** — one hue, two shades |
+
+## Colour has four jobs
+
+- **Categorical** (identity): `--series-1 … --series-8` in fixed order, never cycled. Validated for colour-vision deficiency in both themes.
+- **Sequential** (magnitude): `--seq-100 … --seq-700`, one hue, light → dark.
+- **Diverging** (polarity): `--div-neg` ↔ `--div-pos` with a neutral midpoint.
+- **Status** (state): `--color-good / warning / serious / critical` — reserved, never used as a series, always paired with an icon and label.
+
+## Mark specs
+
+- Lines **2px**, round joins; markers **≥ 8px** with a **2px surface ring** where they overlap.
+- Bars **≤ 24px** thick, **4px rounded at the data end, square at the baseline**; **2px surface gap** between stacked segments and adjacent bars.
+- Gridlines and axes are **solid hairlines** one step off the surface — never dashed.
+- Text wears ink tokens, never the series colour. Direct labels are selective: the endpoint, the extreme, the one series the story is about.
+
+## Interaction & accessibility
+
+- Line charts carry a **crosshair** that snaps to the nearest x and a **single tooltip listing every series**. Bars and cells are their own hit targets.
+- The same readout is available on **keyboard focus** (arrow keys move the crosshair; a live region announces values).
+- A **legend** is always present for two or more series; a single series needs none.
+- Every chart widget has a **table view** — the WCAG-clean twin — one click away in its header.
+- **One filter row above everything it scopes.** Never a filter inside a chart card.
+- **Never a dual-axis chart.** Two measures of different scale get two charts.

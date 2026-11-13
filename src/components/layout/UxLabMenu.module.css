@@ -1,0 +1,55 @@
+.trigger {
+  position: relative;
+}
+.triggerActive {
+  color: var(--color-accent-text);
+}
+.dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-page);
+}
+.panel {
+  width: 340px;
+}
+.header {
+  margin-bottom: var(--space-3);
+}
+.title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+}
+.lead {
+  font-size: var(--text-sm);
+  color: var(--color-ink-3);
+}
+.section {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+}
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+.sectionTitle {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+}
+.sectionMeta {
+  font-size: var(--text-xs);
+  color: var(--color-ink-3);
+}
+.help {
+  margin-top: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+  line-height: var(--leading-snug);
+}

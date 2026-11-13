@@ -1,0 +1,32 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--avatar-color) 18%, var(--color-surface));
+  color: color-mix(in srgb, var(--avatar-color) 80%, var(--color-ink));
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+.xs {
+  width: 20px;
+  height: 20px;
+  font-size: 9px;
+}
+.sm {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+}
+.md {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+.lg {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}

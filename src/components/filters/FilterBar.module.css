@@ -1,0 +1,94 @@
+.bar {
+  position: sticky;
+  top: var(--topbar-h);
+  z-index: var(--z-sticky);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0 calc(var(--content-pad) * -1);
+  padding: var(--space-3) var(--content-pad);
+  background: color-mix(in srgb, var(--color-page) 88%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+}
+.row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.compare {
+  display: inline-flex;
+  align-items: center;
+  padding-left: var(--space-2);
+}
+.spacer {
+  flex: 1 1 auto;
+}
+.views {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-3);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+}
+.chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1-5);
+}
+.saveForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 260px;
+}
+.saveLabel {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+.saveInput {
+  height: var(--control-h);
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-size: var(--text-base);
+}
+.saveInput:focus {
+  border-color: var(--color-accent);
+  outline: 2px solid var(--color-accent-soft-2);
+  outline-offset: 0;
+}
+.saveActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-1);
+}
+
+@media (max-width: 760px) {
+  .compare {
+    width: 100%;
+    padding-left: 0;
+  }
+  .views {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,57 @@
+.group {
+  display: inline-flex;
+  padding: 2px;
+  gap: 2px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-3);
+  height: var(--control-h);
+}
+.sm {
+  height: var(--control-h-sm);
+}
+.fullWidth {
+  display: flex;
+  width: 100%;
+}
+.fullWidth .segment {
+  flex: 1 1 0;
+}
+.segment {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 0 var(--space-2-5, 10px);
+  border-radius: calc(var(--radius-md) - 2px);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink-2);
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.sm .segment {
+  padding: 0 var(--space-2);
+  font-size: var(--text-xs);
+}
+.segment:hover:not(:disabled) {
+  color: var(--color-ink);
+}
+.segment:disabled {
+  opacity: 0.45;
+}
+.selected,
+.selected:hover:not(:disabled) {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-sm);
+}
+.icon {
+  display: inline-flex;
+}
+.icon > svg {
+  width: 14px;
+  height: 14px;
+}

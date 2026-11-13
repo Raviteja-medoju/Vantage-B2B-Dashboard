@@ -1,0 +1,271 @@
+/* ==========================================================================
+   Vantage design tokens
+   Single source of truth shared by the product UI, the charts and Storybook.
+   Light values live on :root; dark values are *selected* steps (not an
+   automatic inversion) and are scoped to [data-theme="dark"], which the
+   ThemeProvider always stamps on <html>.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* --- Surfaces ---------------------------------------------------------- */
+  --color-page: #f9f9f7;
+  --color-surface: #fcfcfb;
+  --color-surface-2: #f3f3f0;
+  --color-surface-3: #ebebe7;
+  --color-surface-raised: #ffffff;
+  --color-overlay: rgba(11, 11, 11, 0.42);
+  --color-border: rgba(11, 11, 11, 0.1);
+  --color-border-strong: rgba(11, 11, 11, 0.2);
+  --color-grid: #e1e0d9;
+  --color-axis: #c3c2b7;
+
+  /* --- Ink --------------------------------------------------------------- */
+  --color-ink: #0b0b0b;
+  --color-ink-2: #52514e;
+  --color-ink-3: #898781;
+  --color-ink-4: #b3b1aa;
+  --color-on-accent: #ffffff;
+
+  /* --- Brand accent (= categorical slot 1) -------------------------------- */
+  --color-accent: #2a78d6;
+  --color-accent-hover: #256abf;
+  --color-accent-active: #1c5cab;
+  --color-accent-text: #1c5cab;
+  --color-accent-soft: #e4eefb;
+  --color-accent-soft-2: #cde2fb;
+  --color-focus-ring: #2a78d6;
+
+  /* --- Status (reserved, never themed, never a series) -------------------- */
+  --color-good: #0ca30c;
+  --color-good-text: #006300;
+  --color-good-soft: #e1f3e1;
+  --color-warning: #fab219;
+  --color-warning-text: #6e4700;
+  --color-warning-soft: #fdf0cf;
+  --color-serious: #ec835a;
+  --color-serious-text: #8a3b17;
+  --color-serious-soft: #fde7dd;
+  --color-critical: #d03b3b;
+  --color-critical-text: #a32727;
+  --color-critical-soft: #f9dddd;
+  --color-neutral-soft: #ebebe7;
+  --color-neutral-text: #52514e;
+
+  /* --- Categorical series (fixed order, validated for CVD) ---------------- */
+  --series-1: #2a78d6; /* blue    */
+  --series-2: #eb6834; /* orange  */
+  --series-3: #1baf7a; /* aqua    */
+  --series-4: #eda100; /* yellow  */
+  --series-5: #e87ba4; /* magenta */
+  --series-6: #008300; /* green   */
+  --series-7: #6250d6; /* violet  */
+  --series-8: #e34948; /* red     */
+  --series-muted: #c3c2b7;
+
+  /* --- Sequential ramp (blue, light -> dark) ------------------------------ */
+  --seq-100: #cde2fb;
+  --seq-150: #b7d3f6;
+  --seq-200: #9ec5f4;
+  --seq-250: #86b6ef;
+  --seq-300: #6da7ec;
+  --seq-350: #5598e7;
+  --seq-400: #3987e5;
+  --seq-450: #2a78d6;
+  --seq-500: #256abf;
+  --seq-550: #1c5cab;
+  --seq-600: #184f95;
+  --seq-650: #104281;
+  --seq-700: #0d366b;
+
+  /* --- Diverging pair (blue <-> red, neutral midpoint) -------------------- */
+  --div-pos: #2a78d6;
+  --div-pos-soft: #86b6ef;
+  --div-neg: #e34948;
+  --div-neg-soft: #f2a3a2;
+  --div-mid: #f0efec;
+
+  /* --- Ordinal ramp (discrete ordered marks: funnel stages, tiers) -------- */
+  /* Light: the step nearest the surface must still clear 2:1 (>= step 250). */
+  --ordinal-1: var(--seq-250);
+  --ordinal-2: var(--seq-350);
+  --ordinal-3: var(--seq-450);
+  --ordinal-4: var(--seq-550);
+  --ordinal-5: var(--seq-650);
+  /* Heat-map bins (7 classes max so adjacent classes stay distinct) */
+  --heat-0: var(--color-surface-2);
+  --heat-1: var(--seq-100);
+  --heat-2: var(--seq-200);
+  --heat-3: var(--seq-300);
+  --heat-4: var(--seq-400);
+  --heat-5: var(--seq-500);
+  --heat-6: var(--seq-600);
+  --heat-7: var(--seq-700);
+
+  /* --- Typography --------------------------------------------------------- */
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, monospace;
+  --text-2xs: 10px;
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 22px;
+  --text-3xl: 28px;
+  --text-4xl: 36px;
+  --text-hero: 48px;
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --tracking-tight: -0.01em;
+  --tracking-caps: 0.04em;
+
+  /* --- Spacing (8pt grid with 4pt half-steps) ----------------------------- */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* --- Radius ------------------------------------------------------------- */
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 999px;
+
+  /* --- Elevation ---------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(11, 11, 11, 0.06);
+  --shadow-md: 0 4px 12px rgba(11, 11, 11, 0.08), 0 1px 3px rgba(11, 11, 11, 0.06);
+  --shadow-lg: 0 12px 32px rgba(11, 11, 11, 0.14), 0 2px 6px rgba(11, 11, 11, 0.08);
+
+  /* --- Motion ------------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+
+  /* --- Layout ------------------------------------------------------------- */
+  --sidebar-w: 240px;
+  --sidebar-w-collapsed: 64px;
+  --topbar-h: 56px;
+  --content-pad: 24px;
+  --control-h: 32px;
+  --control-h-sm: 28px;
+  --control-h-lg: 40px;
+  --row-h: 44px;
+  --z-sticky: 20;
+  --z-dropdown: 60;
+  --z-lab: 90;
+  --z-drawer: 100;
+  --z-modal: 110;
+  --z-toast: 120;
+}
+
+/* --------------------------------------------------------------------------
+   Dark theme: selected steps against the dark surface (#1a1a19).
+   -------------------------------------------------------------------------- */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-page: #0d0d0d;
+  --color-surface: #1a1a19;
+  --color-surface-2: #222221;
+  --color-surface-3: #2b2b29;
+  --color-surface-raised: #232322;
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
+  --color-grid: #2c2c2a;
+  --color-axis: #383835;
+
+  --color-ink: #f0efec;
+  --color-ink-2: #c3c2b7;
+  --color-ink-3: #898781;
+  --color-ink-4: #5c5b56;
+  --color-on-accent: #ffffff;
+
+  --color-accent: #3987e5;
+  --color-accent-hover: #5598e7;
+  --color-accent-active: #6da7ec;
+  --color-accent-text: #86b6ef;
+  --color-accent-soft: rgba(57, 135, 229, 0.16);
+  --color-accent-soft-2: rgba(57, 135, 229, 0.28);
+  --color-focus-ring: #5598e7;
+
+  --color-good: #0ca30c;
+  --color-good-text: #4fc74f;
+  --color-good-soft: rgba(12, 163, 12, 0.16);
+  --color-warning: #fab219;
+  --color-warning-text: #f2c75c;
+  --color-warning-soft: rgba(250, 178, 25, 0.16);
+  --color-serious: #ec835a;
+  --color-serious-text: #f3a383;
+  --color-serious-soft: rgba(236, 131, 90, 0.16);
+  --color-critical: #d03b3b;
+  --color-critical-text: #ee7272;
+  --color-critical-soft: rgba(208, 59, 59, 0.18);
+  --color-neutral-soft: #2b2b29;
+  --color-neutral-text: #c3c2b7;
+
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+  --series-muted: #4a4a47;
+
+  --div-pos: #3987e5;
+  --div-pos-soft: #1c5cab;
+  --div-neg: #e66767;
+  --div-neg-soft: #8f2f2f;
+  --div-mid: #383835;
+
+  /* Dark: the step nearest the (dark) surface goes no darker than 600; later stages lighten. */
+  --ordinal-1: var(--seq-600);
+  --ordinal-2: var(--seq-500);
+  --ordinal-3: var(--seq-400);
+  --ordinal-4: var(--seq-300);
+  --ordinal-5: var(--seq-200);
+  --heat-0: var(--color-surface-2);
+  --heat-1: var(--seq-700);
+  --heat-2: var(--seq-600);
+  --heat-3: var(--seq-500);
+  --heat-4: var(--seq-400);
+  --heat-5: var(--seq-300);
+  --heat-6: var(--seq-200);
+  --heat-7: var(--seq-100);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* Density switch (user preference, persisted) */
+:root[data-density='compact'] {
+  --row-h: 32px;
+  --control-h: 28px;
+  --content-pad: 16px;
+}
+
+:root{--color-page:#f3f5f9;--color-surface:#ffffff;--color-surface-2:#f6f8fb;--color-surface-3:#edf1f7;--color-ink:#18263c;--color-ink-2:#526078;--color-ink-3:#65738a;--color-border:rgba(32,55,88,.1);--radius-lg:16px;--radius-xl:20px;--topbar-h:68px;--content-pad:32px;--control-h:36px;--row-h:52px;--shadow-sm:0 2px 6px rgba(24,38,60,.025),0 12px 28px rgba(24,38,60,.025)}:root[data-theme='dark']{--color-page:#101722;--color-surface:#182231;--color-surface-2:#1e2b3d;--color-surface-3:#26364b;--color-ink:#edf3fa;--color-ink-2:#bbc8d9;--color-ink-3:#94a6bf;--color-border:rgba(190,210,240,.12)}@media(max-width:640px){:root{--content-pad:16px;--topbar-h:60px}}
+:root{--sidebar-w-collapsed:72px}
