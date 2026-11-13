@@ -95,7 +95,7 @@ export function WidgetFrame({
               <Table2 />
             </IconButton>
           )}
-          <IconButton label="Widget options" size="sm" ref={menuBtn} onClick={() => setMenuOpen((o) => !o)} aria-haspopup="menu" aria-expanded={menuOpen} tooltip={!menuOpen}>
+          <IconButton label="Widget options" size="sm" ref={menuBtn} onClick={() => setMenuOpen((o) => !o)} aria-haspopup="menu" aria-expanded={menuOpen}>
             <MoreHorizontal />
           </IconButton>
           <Menu open={menuOpen} onClose={() => setMenuOpen(false)} anchorRef={menuBtn} items={items} ariaLabel={`${title} options`} />
